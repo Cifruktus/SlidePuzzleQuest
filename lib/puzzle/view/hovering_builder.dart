@@ -10,6 +10,7 @@ class HoveringBuilder extends StatefulWidget {
   final Widget Function(BuildContext, Offset, bool, bool) builder;
   final VoidCallback? onTap;
   final void Function(IntPos dir)? onSlide;
+  final bool displace;
   final double maxDistance;
   final double maxDistanceForTap;
   final double timeSpeed;
@@ -25,6 +26,7 @@ class HoveringBuilder extends StatefulWidget {
     this.gestireSlideDistance = 15,
     this.onTap,
     this.onSlide,
+    this.displace = true,
     required this.vsync,
   }) : super(key: key);
 
@@ -171,24 +173,28 @@ class _HoveringBuilderState extends State<HoveringBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: widget.maxDistance + pos.dx,
-        top: widget.maxDistance + pos.dy,
-      ),
-      child: MouseRegion(
-        onEnter: onEnter,
-        onExit: onExit,
-        onHover: onHoverUpdate,
-        child: GestureDetector(
-          onPanEnd: onDragUp,
-          onPanDown: onDragDown,
-          onPanUpdate: onDragUpdate,
-          onPanCancel: onDragCancel,
-          child: widget.builder(context, pos, hover, pressed),
-        ),
+    var content = MouseRegion(
+      onEnter: onEnter,
+      onExit: onExit,
+      onHover: onHoverUpdate,
+      child: GestureDetector(
+        onPanEnd: onDragUp,
+        onPanDown: onDragDown,
+        onPanUpdate: onDragUpdate,
+        onPanCancel: onDragCancel,
+        child: widget.builder(context, pos, hover, pressed),
       ),
     );
+
+    return widget.displace
+        ? Padding(
+            padding: EdgeInsets.only(
+              left: widget.maxDistance + pos.dx,
+              top: widget.maxDistance + pos.dy,
+            ),
+            child: content,
+          )
+        : content;
   }
 
   @override
@@ -197,26 +203,3 @@ class _HoveringBuilderState extends State<HoveringBuilder> {
     controller.dispose();
   }
 }
-
-/*
-@override
-Widget build(BuildContext context) {
-  return Padding(
-    padding: EdgeInsets.fromLTRB(
-      widget.maxDistance + pos.dx,
-      widget.maxDistance + pos.dy,
-      widget.maxDistance - pos.dx,
-      widget.maxDistance - pos.dy,
-    ),
-    child: MouseRegion(
-      onHover: onHoverUpdate,
-      child: GestureDetector(
-        onPanEnd: onDragUp,
-        onPanDown: onDragDown,
-        onPanUpdate: onDragUpdate,
-        onPanCancel: onDragCancel,
-        child: widget.builder(context, pos),
-      ),
-    ),
-  );
-} */
