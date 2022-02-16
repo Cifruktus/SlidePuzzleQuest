@@ -55,6 +55,4 @@ List<String> levelText(List<Level> history, Level current) {
   return [
     if (levelText != null) levelText,
   ];
-
-  // todo situation when you go to the last level instantly
 }
