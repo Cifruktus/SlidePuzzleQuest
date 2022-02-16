@@ -171,31 +171,22 @@ class _HoveringBuilderState extends State<HoveringBuilder> {
 
   @override
   Widget build(BuildContext context) {
-
-
-    return SizedBox(
-      width: 150,
-      height: 150, // todo remove hardcode
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Positioned(
-            left: widget.maxDistance + pos.dx,
-            top: widget.maxDistance + pos.dy,
-            child: MouseRegion(
-              onEnter: onEnter,
-              onExit: onExit,
-              onHover: onHoverUpdate,
-              child: GestureDetector(
-                onPanEnd: onDragUp,
-                onPanDown: onDragDown,
-                onPanUpdate: onDragUpdate,
-                onPanCancel: onDragCancel,
-                child: widget.builder(context, pos, hover, pressed),
-              ),
-            ),
-          ),
-        ],
+    return Padding(
+      padding: EdgeInsets.only(
+        left: widget.maxDistance + pos.dx,
+        top: widget.maxDistance + pos.dy,
+      ),
+      child: MouseRegion(
+        onEnter: onEnter,
+        onExit: onExit,
+        onHover: onHoverUpdate,
+        child: GestureDetector(
+          onPanEnd: onDragUp,
+          onPanDown: onDragDown,
+          onPanUpdate: onDragUpdate,
+          onPanCancel: onDragCancel,
+          child: widget.builder(context, pos, hover, pressed),
+        ),
       ),
     );
   }
