@@ -92,6 +92,7 @@ class _CustomMarkdownDialogState extends State<CustomMarkdownDialog> {
 
 class CustomMarkdownBody extends StatelessWidget {
   static final MarkdownStyleSheet styleSheet = MarkdownStyleSheet(
+      textScaleFactor: 1.2,
       p: const TextStyle(color: Colors.white),
       h1: const TextStyle(color: Colors.white),
       a: const TextStyle(color: Color(0xFF6AC3FF)),
