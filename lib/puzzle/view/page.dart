@@ -175,7 +175,7 @@ class _GameToolbar extends StatelessWidget {
 class _GameBoard extends StatelessWidget {
   final Size size;
 
-  static const durationToHideInTheEnd = Duration(milliseconds: 2400); //2400); //todo
+  static const durationToHideInTheEnd = Duration(milliseconds: 2200);
   static const normalTransitionDuration = Duration(milliseconds: 100);
 
   const _GameBoard({Key? key, required this.size}) : super(key: key);
