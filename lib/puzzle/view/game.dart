@@ -522,7 +522,7 @@ class PortalEffectsPainter extends CustomPainter {
         [0, 0.5, 1],
         TileMode.mirror,
         0 - t / 2,
-        pi / 11 * 0.75 - t / 2, //+ t / 5
+        pi / 13 - t / 2, //+ t / 5
       );
 
     double blur = 0.05;
@@ -541,7 +541,7 @@ class PortalEffectsPainter extends CustomPainter {
         [0, blur, 0.5 - blur, 0.5 + blur, 1],
         TileMode.repeated,
         0 + t / 5,
-        (pi * 2 / 7 * 0.75) + t / 5, //  - t / 2 // todo fix visible seam cos of * 0.75
+        (pi * 2 / 9) + t / 5, //  - t / 2 // todo fix visible seam cos of * 0.75
       );
 
     canvas.saveLayer(null, Paint()..color = Colors.white.withOpacity(opacity));
