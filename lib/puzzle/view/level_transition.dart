@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slide_puzzle/puzzle/cubit/puzzle_cubit.dart';
 import 'package:slide_puzzle/puzzle/models/image_align.dart';
 import 'package:slide_puzzle/puzzle/view/background.dart';
+import 'package:slide_puzzle/puzzle/view/hovering_builder.dart';
 
 class LevelTransition extends StatefulWidget {
   static const double buttonSize = 200;
@@ -74,7 +75,7 @@ class _LevelTransitionState extends State<LevelTransition> {
   }
 }
 
-class LevelTransitionButton extends StatelessWidget {
+class LevelTransitionButton extends StatefulWidget {
   final ImageAlign align;
   final ui.Image? background;
   final Color color;
@@ -93,49 +94,60 @@ class LevelTransitionButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<LevelTransitionButton> createState() => _LevelTransitionButtonState();
+}
+
+class _LevelTransitionButtonState extends State<LevelTransitionButton> with SingleTickerProviderStateMixin {
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPress,
-      child: Container(
-        width: size,
-        height: size,
-        decoration: const BoxDecoration(
-          // image: DecorationImage.,
-          borderRadius: BorderRadius.all(Radius.circular(150)),
-          boxShadow: [
-            // BoxShadow(
-            //   //   offset: Offset(4,4),
-            //     spreadRadius: 20,
-            //     blurRadius: 70,
-            //     color: Colors.black87),
-            BoxShadow(
-                //   offset: Offset(4,4),
-                spreadRadius: 2,
-                blurRadius: 5,
-                color: Colors.white),
-          ],
-        ),
-        child: CustomPaint(
-            painter: LevelTransitionPainter(
-              shape: Path(),
-              pos: align,
-              image: background,
+      onTap: widget.onPress,
+      child: HoveringBuilder(
+        displace: false,
+        vsync: this,
+        timeSpeed: 0.3,
+        builder: (context, pos, _,__) {
+          print(pos);
+          return Container(
+            width: widget.size,
+            height: widget.size,
+            decoration: const BoxDecoration(
+              // image: DecorationImage.,
+              borderRadius: BorderRadius.all(Radius.circular(150)),
+              boxShadow: [
+                // BoxShadow(
+                //   //   offset: Offset(4,4),
+                //     spreadRadius: 20,
+                //     blurRadius: 70,
+                //     color: Colors.black87),
+                BoxShadow(
+                    //   offset: Offset(4,4),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    color: Colors.white),
+              ],
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: child,
-            )),
+            child: CustomPaint(
+                painter: LevelTransitionPainter(
+                  pos: widget.align.translate(pos),
+                  image: widget.background,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: widget.child,
+                )),
+          );
+        },
       ),
     );
   }
 }
 
 class LevelTransitionPainter extends CustomPainter {
-  final Path shape;
   final ui.Image? image;
   final ImageAlign pos;
 
-  LevelTransitionPainter({required this.shape, required this.pos, this.image});
+  LevelTransitionPainter({required this.pos, this.image});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -207,7 +219,9 @@ class LevelTransitionPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(LevelTransitionPainter oldDelegate) => false;
+  bool shouldRepaint(LevelTransitionPainter oldDelegate) {
+    return oldDelegate.pos != pos || oldDelegate.image != image;
+  }
 
   @override
   bool shouldRebuildSemantics(LevelTransitionPainter oldDelegate) => false;
