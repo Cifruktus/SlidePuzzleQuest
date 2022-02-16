@@ -25,7 +25,6 @@ class _CustomMarkdownDialogState extends State<CustomMarkdownDialog> {
 
   @override
   Widget build(BuildContext context) {
-    // todo scroll down
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15)), side: BorderSide(color: Colors.white70)),

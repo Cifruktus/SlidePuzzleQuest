@@ -7,7 +7,7 @@ import 'package:slide_puzzle/puzzle/view/widgets.dart';
 import '../cringe.dart';
 import '../levels.dart';
 
-final storyButtonKey = GlobalKey(); //todo does not work
+final storyButtonKey = GlobalKey();
 
 class PuzzleHint extends StatelessWidget {
   final List<List<int>> board;
@@ -28,7 +28,6 @@ class PuzzleHint extends StatelessWidget {
 
     if (board == level0Hint) {
       return StoryButton(
-        // todo never gets badge active
         key: storyButtonKey,
         data: data,
       );
