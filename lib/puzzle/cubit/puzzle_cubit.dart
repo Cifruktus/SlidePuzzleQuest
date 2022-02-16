@@ -73,7 +73,7 @@ class PuzzleCubit extends Cubit<PuzzleState> {
       return;
     }
 
-    await Future.delayed(const Duration(milliseconds: 100)); // to wait animations to finish
+    await Future.delayed(const Duration(milliseconds: 300)); // to wait animations to finish
 
     emit(PuzzleFinished(
       board: board,
