@@ -47,7 +47,7 @@ Something weird just happened, you teleported to another place on Earth.
 
 Is this puzzle can move you anywhere on the planet? You felt that it wasn't exactly true. This thing was capable of much more. 
 
-You felt a little disappointed that you entered this exact combination. Nothing new happened, story ended here anyway.
+You felt a little disappointed that story ended here anyway.
 """;
 
 const String credits = """
