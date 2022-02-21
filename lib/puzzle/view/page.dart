@@ -20,6 +20,10 @@ import 'hint.dart';
 
 bool shiftIsPressed = false;
 
+const double puzzleHeight = 500;
+const double toolsHeight = 100;
+const double gameSizeWithToolbar = puzzleHeight + toolsHeight * 2;
+
 Future<LevelResources> loadGame(BuildContext context) async {
   await precacheImage(const AssetImage('assets/img/puzzle.png'), context);
   return await loadLevel(0);
@@ -63,25 +67,53 @@ class _PuzzlePageState extends State<PuzzlePage> {
         onKeyEvent: (e) => onKeyEvent(e, context),
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          body: Align(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(),
-              child: LayoutBuilder(builder: (context, BoxConstraints constraints) {
-                var size = Size(constraints.maxWidth, constraints.maxHeight);
+          body: LayoutBuilder(builder: (context, BoxConstraints constraints) {
+            var size = Size(constraints.maxWidth, constraints.maxHeight);
 
-                return Stack(
-                  children: [
-                    const _GameBackground(),
-                    _GameBoard(size: size),
-                    _TransitionButton(size: size),
-                    _FinishedGame(size: size),
-                    RepaintBoundary(child: _GameToolbar(size: size)),
-                  ],
-                );
-              }),
-            ),
-          ),
+            var aspectRatio = constraints.maxWidth / constraints.maxHeight;
+
+            bool toolBarAtTheBottom = constraints.maxHeight > gameSizeWithToolbar ?
+             true : aspectRatio < 1;
+
+            var modifiedSize = toolBarAtTheBottom
+                ? const Size(puzzleHeight, gameSizeWithToolbar)
+                : const Size(gameSizeWithToolbar, puzzleHeight);
+
+            modifiedSize = scaleUpToAspectRatio(aspectRatio, modifiedSize);
+            if (modifiedSize.width < size.width) modifiedSize = size;
+            // doesn't matter what side to compare as aspect ratio is the same
+
+            return SizedBox.expand(
+              child: FittedBox(
+                fit: BoxFit.contain,//cover,
+                child: SizedBox.fromSize(
+                  size: modifiedSize,
+                  child: Stack(
+                    children: [
+                      const _GameBackground(),
+                      _GameBoard(size: size),
+                      _TransitionButton(size: size),
+                      _FinishedGame(size: size),
+                      RepaintBoundary(
+                          child: _GameToolbar(
+                        size: size,
+                        onTheBottom: toolBarAtTheBottom,
+                      )),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }),
         ));
+  }
+
+  Size scaleUpToAspectRatio(double aspectRatio, Size original){
+    if (aspectRatio > (original.width / original.height)) {
+      return Size(original.height * aspectRatio, original.height);
+    } else {
+      return Size(original.width, original.width / aspectRatio);
+    }
   }
 
   void onKeyEvent(KeyEvent event, BuildContext context) {
@@ -147,8 +179,9 @@ class _GameBackground extends StatelessWidget {
 
 class _GameToolbar extends StatelessWidget {
   final Size size;
+  final bool onTheBottom;
 
-  const _GameToolbar({Key? key, required this.size}) : super(key: key);
+  const _GameToolbar({Key? key, required this.size, required this.onTheBottom}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -157,15 +190,16 @@ class _GameToolbar extends StatelessWidget {
     var hide = finished || context.select((PuzzleCubit p) => p.state.uiHidden);
 
     return Align(
-        alignment: Alignment.bottomCenter,
+        alignment: onTheBottom ? Alignment.bottomCenter : Alignment.centerRight,
         child: AnimatedOpacity(
           duration: const Duration(milliseconds: 500),
           opacity: hide ? 0 : 1,
           child: IgnorePointer(
             ignoring: hide,
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: PuzzleHint(board: board),
+              padding: const EdgeInsets.all(8.0),
+              child: PuzzleHint(board: board,
+              horizontal: onTheBottom),
             ),
           ),
         ));

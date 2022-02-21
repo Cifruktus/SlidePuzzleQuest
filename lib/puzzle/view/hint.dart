@@ -11,8 +11,9 @@ final storyButtonKey = GlobalKey();
 
 class PuzzleHint extends StatelessWidget {
   final List<List<int>> board;
+  final bool horizontal;
 
-  const PuzzleHint({Key? key, required this.board}) : super(key: key);
+  const PuzzleHint({Key? key, required this.board, this.horizontal = true}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,78 +28,96 @@ class PuzzleHint extends StatelessWidget {
     }
 
     if (board == level0Hint) {
-      return StoryButton(
+      return StoryButton (
         key: storyButtonKey,
         data: data,
       );
     }
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            CustomIconButton(
-              //color: Colors.green,
-              icon: const Icon(Icons.remove_red_eye_rounded),
-              onClick: () {
-                var puzzle = context.read<PuzzleCubit>();
-                puzzle.setBoardHidden(!puzzle.state.puzzleHidden);
-              },
-            ),
-            CustomIconButton(
-              //color: Colors.green,
-              icon: const Icon(Icons.volume_up_rounded),
-
-             //onClick: () {
-             //  var puzzle = context.read<PuzzleCubit>();
-             //  puzzle.setBoardHidden(!puzzle.state.puzzleHidden);
-             // },
-            ),
-          ],
+    var boardHint = Container(
+      decoration: BoxDecoration(
+        boxShadow: [BoxShadow(blurRadius: 2, offset: Offset(1, 1), color: Colors.black26)],
+        border: Border.all(
+          width: 1,
+          color: Colors.white70,
         ),
-        Container(
-          decoration: BoxDecoration(
-            boxShadow: [BoxShadow(blurRadius: 2, offset: Offset(1, 1), color: Colors.black26)],
-            border: Border.all(
-              width: 1,
-              color: Colors.white70,
-            ),
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            //color: Colors.black38,
-            //backgroundBlendMode: BlendMode.hardLight,
-            //color: Colors.deepPurple.withAlpha(120),
-          ),
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: lines.map((line) => Row(children: line)).toList(),
-          ),
-        ),
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            StoryButton(
-              key: storyButtonKey,
-              data: data,
-            ),
-            CustomIconButton(
-              //color: Colors.green,
-              icon: Text("i", style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 24,
-              ),), // todo
-              onClick: () {
-                showAboutPage(context);
-              },
-            ),
-          ],
-        ),
-      ],
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        //color: Colors.black38,
+        //backgroundBlendMode: BlendMode.hardLight,
+        //color: Colors.deepPurple.withAlpha(120),
+      ),
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: lines.map((line) => Row(children: line, mainAxisSize: MainAxisSize.min,)).toList(),
+      ),
     );
+
+    var toolsPrimary = [
+      CustomIconButton(
+        //color: Colors.green,
+        icon: const Icon(Icons.remove_red_eye_rounded),
+        onClick: () {
+          var puzzle = context.read<PuzzleCubit>();
+          puzzle.setBoardHidden(!puzzle.state.puzzleHidden);
+        },
+      ),
+      CustomIconButton(
+        //color: Colors.green,
+        icon: const Icon(Icons.volume_up_rounded),
+      ),
+    ];
+
+    var toolsSecondary = [
+      StoryButton(
+        key: storyButtonKey,
+        data: data,
+      ),
+      CustomIconButton(
+        //color: Colors.green,
+        icon: Text(
+          "i",
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 24,
+          ),
+        ), // todo
+        onClick: () {
+          showAboutPage(context);
+        },
+      ),
+    ];
+
+    return horizontal
+        ? Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: toolsPrimary,
+              ),
+              boardHint,
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: toolsSecondary,
+              ),
+            ],
+          )
+        : Column(
+            mainAxisSize: MainAxisSize.min,
+            verticalDirection: VerticalDirection.up,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: toolsPrimary,
+              ),
+              boardHint,
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: toolsSecondary,
+              ),
+            ],
+          );
   }
 }
 
