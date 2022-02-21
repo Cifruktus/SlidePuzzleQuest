@@ -34,31 +34,32 @@ class _CustomMarkdownDialogState extends State<CustomMarkdownDialog> {
       content: ScrollConfiguration(
         behavior: ScrollConfiguration.of(context).copyWith(
             scrollbars: false
-      //  overscroll:
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxHeight: 400,
-                  maxWidth: 400,
-                ),
-                child: RawScrollbar(
-                   controller: _scrollController,
-                  thumbColor: Colors.white,
-                  radius: const Radius.circular(20),
-                  isAlwaysShown: true,
-                  thickness: 5,
-                  child: SingleChildScrollView(
-                    controller: _scrollController,
-                    reverse: widget.reversed,
-                    padding: EdgeInsets.symmetric(horizontal: 8),
-                    child: CustomMarkdownBody(
-                      data: widget.data,
-                    ),
+            Flexible(
+              child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxHeight: 420,
+                    maxWidth: 400,
                   ),
-                )),
+                  child: RawScrollbar(
+                     controller: _scrollController,
+                    thumbColor: Colors.white,
+                    radius: const Radius.circular(20),
+                    isAlwaysShown: true,
+                    thickness: 5,
+                    child: SingleChildScrollView(
+                      controller: _scrollController,
+                      reverse: widget.reversed,
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: CustomMarkdownBody(
+                        data: widget.data,
+                      ),
+                    ),
+                  )),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Row(
