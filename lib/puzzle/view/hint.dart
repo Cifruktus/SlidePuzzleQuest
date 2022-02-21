@@ -245,6 +245,7 @@ void showLore(BuildContext context) {
 
         return CustomMarkdownDialog(
           data: text,
+          reversed: true,
         );
       }).then((result) {
     context.read<PuzzleCubit>().setUiHidden(false);
