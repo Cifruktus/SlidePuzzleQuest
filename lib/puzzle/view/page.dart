@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import 'package:slide_puzzle/puzzle/cubit/puzzle_cubit.dart';
@@ -12,10 +11,6 @@ import 'package:slide_puzzle/puzzle/view/endgame.dart';
 import 'package:slide_puzzle/puzzle/view/game.dart';
 import 'package:slide_puzzle/puzzle/view/level_transition.dart';
 
-import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:slide_puzzle/puzzle/view/widgets.dart';
-
-import '../cringe.dart';
 import 'hint.dart';
 
 bool shiftIsPressed = false;
@@ -85,7 +80,6 @@ class _PuzzlePageState extends State<PuzzlePage> {
 
             return SizedBox.expand(
               child: FittedBox(
-                fit: BoxFit.contain,//cover,
                 child: SizedBox.fromSize(
                   size: modifiedSize,
                   child: Stack(

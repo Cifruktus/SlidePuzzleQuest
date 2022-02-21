@@ -80,19 +80,7 @@ class _HoveringBuilderState extends State<HoveringBuilder> {
         velocity += addedImpulse;
         addedImpulse = const Offset(0, 0);
 
-        var prevPos = pos;
-        var prevDist = prevPos.distance;
-
         pos += velocity * dt;
-
-
-        /*
-        var dist = pos.distance;
-        var difference = dist - prevDist;
-        if (dist > maxDistance * 0.1) {
-          var w = max((maxDistance - dist) / maxDistance, 0);
-          pos = Offset.fromDirection(pos.direction, prevDist + min(difference, w * difference)); // max(prevDist, d);
-        } */
 
         pos = Offset.fromDirection(pos.direction, min(pos.distance, maxDistance));
 

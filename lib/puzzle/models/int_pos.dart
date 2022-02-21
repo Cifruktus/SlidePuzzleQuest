@@ -14,7 +14,7 @@ class IntPos extends Equatable {
     throw Exception("vector can't be normalized");
   }
 
-  get isNormalized => (x == 0 && (y == 1 || y == -1)) || (y == 0 && (x == 1 || x == -1));
+  bool get isNormalized => (x == 0 && (y == 1 || y == -1)) || (y == 0 && (x == 1 || x == -1));
 
   const IntPos(this.x, this.y);
 

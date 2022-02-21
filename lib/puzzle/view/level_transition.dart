@@ -23,7 +23,7 @@ class LevelTransition extends StatefulWidget {
 
 class _LevelTransitionState extends State<LevelTransition> {
   static const enableDelay = Duration(milliseconds: 2500);
-  static const disableDelay = Duration(milliseconds: 0);
+  static const disableDelay = Duration();
 
   bool visible = false;
   bool enabled = false;
@@ -107,7 +107,6 @@ class _LevelTransitionButtonState extends State<LevelTransitionButton> with Sing
         vsync: this,
         timeSpeed: 0.3,
         builder: (context, pos, _,__) {
-          print(pos);
           return Container(
             width: widget.size,
             height: widget.size,
@@ -196,7 +195,7 @@ class LevelTransitionPainter extends CustomPainter {
 
     canvas.restore();
 
-    final paint = Paint()
+    var paint = Paint()
       ..shader = ui.Gradient.radial(center, 102, [
         Colors.transparent,
         Colors.white.withOpacity(0.08),

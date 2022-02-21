@@ -140,7 +140,7 @@ List<List<int>> generateBoard(int w, int h) {
 }
 
 extension BoardExtention on List<List<int>> {
-  get board => this;
+  List<List<int>> get board => this;
 
   void shuffleBoard() {
     var r = Random();

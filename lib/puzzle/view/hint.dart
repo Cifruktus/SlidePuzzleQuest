@@ -36,15 +36,13 @@ class PuzzleHint extends StatelessWidget {
 
     var boardHint = Container(
       decoration: BoxDecoration(
-        boxShadow: [BoxShadow(blurRadius: 2, offset: Offset(1, 1), color: Colors.black26)],
+        boxShadow: const [
+          BoxShadow(blurRadius: 2, offset: Offset(1, 1), color: Colors.black26),
+        ],
         border: Border.all(
-          width: 1,
           color: Colors.white70,
         ),
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-        //color: Colors.black38,
-        //backgroundBlendMode: BlendMode.hardLight,
-        //color: Colors.deepPurple.withAlpha(120),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       padding: const EdgeInsets.all(10),
       child: Column(
@@ -62,9 +60,8 @@ class PuzzleHint extends StatelessWidget {
           puzzle.setBoardHidden(!puzzle.state.puzzleHidden);
         },
       ),
-      CustomIconButton(
-        //color: Colors.green,
-        icon: const Icon(Icons.volume_up_rounded),
+      const CustomIconButton(
+        icon: Icon(Icons.volume_up_rounded),
       ),
     ];
 
@@ -75,13 +72,13 @@ class PuzzleHint extends StatelessWidget {
       ),
       CustomIconButton(
         //color: Colors.green,
-        icon: Text(
+        icon: const Text(
           "i",
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 24,
           ),
-        ), // todo
+        ),
         onClick: () {
           showAboutPage(context);
         },
@@ -136,11 +133,10 @@ class HintCell extends StatelessWidget {
         // backgroundBlendMode: BlendMode.hardLight,
         // color: Colors.deepPurple.withAlpha(120),
         shape: BoxShape.circle,
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(blurRadius: 2, offset: Offset(1, 1), color: Colors.black26)
         ],
         border: Border.all(
-          width: 1,
           color: Colors.white70,
         ),
       ),
@@ -186,9 +182,8 @@ class CustomIconButton extends StatelessWidget {
             //  maximumSize: MaterialStateProperty.all(Size(50, 50)),
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50.0),
-                side: BorderSide(
+                side: const BorderSide(
                   color: Colors.white70,
-                  width: 1,
                 )
                 //  side: BorderSide(color: Colors.red),
                 )),
@@ -243,7 +238,7 @@ void showAboutPage(BuildContext context) {
       context: context,
       barrierColor: Colors.transparent,
       builder: (c) {
-        return CustomMarkdownDialog(
+        return const CustomMarkdownDialog(
           data: about,
         );
       }).then((result) {

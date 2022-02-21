@@ -1,7 +1,6 @@
 import 'package:flutter_markdown/flutter_markdown.dart';
 
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomMarkdownDialog extends StatefulWidget {
@@ -26,8 +25,10 @@ class _CustomMarkdownDialogState extends State<CustomMarkdownDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(15)), side: BorderSide(color: Colors.white70)),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+        side: BorderSide(color: Colors.white70),
+      ),
       backgroundColor: Colors.black26,
       elevation: 3,
       contentTextStyle: const TextStyle(color: Colors.white),
@@ -53,7 +54,7 @@ class _CustomMarkdownDialogState extends State<CustomMarkdownDialog> {
                     child: SingleChildScrollView(
                       controller: _scrollController,
                       reverse: widget.reversed,
-                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: CustomMarkdownBody(
                         data: widget.data,
                       ),
@@ -73,9 +74,8 @@ class _CustomMarkdownDialogState extends State<CustomMarkdownDialog> {
                       //  maximumSize: MaterialStateProperty.all(Size(50, 50)),
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
-                          side: BorderSide(
+                          side: const BorderSide(
                             color: Colors.white70,
-                            width: 1,
                           )
                           )),
                     ),
@@ -135,15 +135,11 @@ class CustomContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        boxShadow: [BoxShadow(blurRadius: 2, offset: Offset(1, 1), color: Colors.black26)],
+        boxShadow: const [BoxShadow(blurRadius: 2, offset: Offset(1, 1), color: Colors.black26)],
         border: Border.all(
-          width: 1,
           color: Colors.white70,
         ),
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-        //color: Colors.black38,
-        //backgroundBlendMode: BlendMode.hardLight,
-        //color: Colors.deepPurple.withAlpha(120),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       padding: const EdgeInsets.all(10),
       child: child,

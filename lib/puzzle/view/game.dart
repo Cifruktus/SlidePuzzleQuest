@@ -219,7 +219,7 @@ class _SlideGameState extends State<SlideGame> with TickerProviderStateMixin {
         1,
         max(
             0,
-            (controller.lastElapsedDuration! - showTransitionStart! - const Duration(milliseconds: 0)).inMilliseconds /
+            (controller.lastElapsedDuration! - showTransitionStart! - const Duration()).inMilliseconds /
                 700),
       );
     }
@@ -497,7 +497,7 @@ class PortalEffectsPainter extends CustomPainter {
 
     var circleSize = 400.0;
 
-    final paint1 = Paint()
+    var paint1 = Paint()
       ..shader = ui.Gradient.radial(
         center,
         circleSize + sin(t * 2) * 70,
@@ -510,7 +510,7 @@ class PortalEffectsPainter extends CustomPainter {
         [0, 0.3, 0.5, 1],
       );
 
-    final paint2 = Paint()
+    var paint2 = Paint()
       ..shader = ui.Gradient.sweep(
         center,
         //circleSize,
@@ -527,7 +527,7 @@ class PortalEffectsPainter extends CustomPainter {
 
     double blur = 0.05;
 
-    final paint3 = Paint()
+    var paint3 = Paint()
       ..shader = ui.Gradient.sweep(
         center,
         //circleSize,
@@ -583,7 +583,7 @@ class PortalEffectsPainter extends CustomPainter {
 
     var updatedPos = center + Offset.fromDirection(angle + angleTraveled, dist + distTraveled);
 
-    final paint = Paint()
+    var paint = Paint()
       ..shader = ui.Gradient.radial(
         updatedPos,
         radius,

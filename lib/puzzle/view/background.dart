@@ -30,8 +30,6 @@ class _GameBackgroundState extends State<GameBackground> with TickerProviderStat
     controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 4000),
-      lowerBound: 0,
-      upperBound: 1,
     );
 
     controller.addListener(() {
@@ -124,7 +122,7 @@ class BackgroundPainter extends CustomPainter {
           ..blendMode = BlendMode.dstATop
           ..filterQuality = FilterQuality.low);
 
-    final paint = Paint()
+    var paint = Paint()
       ..shader = ui.Gradient.radial(
         pos,
         transitionSize / 2 + glowDist,
