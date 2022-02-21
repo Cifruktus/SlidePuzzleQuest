@@ -72,10 +72,10 @@ class _PuzzlePageState extends State<PuzzlePage> {
                 return Stack(
                   children: [
                     const _GameBackground(),
-                    RepaintBoundary(child: _GameBoard(size: size)), //todo do we need repaint boundary here?
+                    _GameBoard(size: size),
                     _TransitionButton(size: size),
                     _FinishedGame(size: size),
-                    _GameToolbar(size: size),
+                    RepaintBoundary(child: _GameToolbar(size: size)),
                   ],
                 );
               }),
