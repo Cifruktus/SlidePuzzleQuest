@@ -148,7 +148,15 @@ class CustomIconButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Badge(
-        position: BadgePosition.topEnd(top: 0, end: 0),
+        position: BadgePosition.topEnd(top: -6, end: -2),
+        badgeContent: const Text(
+          "!",
+          style: TextStyle(
+            color: Colors.white70,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        padding: const EdgeInsets.all(6.0),
         showBadge: badgeEnabled,
         child: ElevatedButton(
           style: ButtonStyle(
