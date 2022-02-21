@@ -48,3 +48,8 @@ flutter:
   assets:
     - assets/img/
     - assets/img/background/
+
+  fonts:
+    - family: ValeraRound
+      fonts:
+        - asset: assets/fonts/ValeraRound/VarelaRound-Regular.ttf
