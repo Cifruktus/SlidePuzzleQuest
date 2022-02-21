@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          highlightColor: const Color(0xffffc600)
+        fontFamily: "ValeraRound",
       ),
       home: PuzzlePage.route(context),
     );
