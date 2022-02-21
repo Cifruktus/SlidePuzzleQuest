@@ -57,7 +57,7 @@ This game was made for [Flutter Puzzle Hack](https://flutterhack.devpost.com)
 
 Images source: [Pixabay](https://pixabay.com)
 
-[Source code](https://github.com/Cifruktus/PuzzleQuest)
+[Source code](https://github.com/Cifruktus/SlidePuzzleQuest)
 
 Did you find all the places?
 """;
@@ -67,5 +67,5 @@ This game was made for [Flutter Puzzle Hack](https://flutterhack.devpost.com)
 
 Images source: [Pixabay](https://pixabay.com)
 
-[Source code](https://github.com/Cifruktus/PuzzleQuest)
+[Source code](https://github.com/Cifruktus/SlidePuzzleQuest)
 """;
