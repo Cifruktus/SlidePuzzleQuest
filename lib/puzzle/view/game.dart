@@ -509,6 +509,8 @@ class PortalEffectsPainter extends CustomPainter {
         [0, 0.3, 0.5, 1],
       );
 
+    var beamsAngle1 = (t / 2) % (pi * 2);
+
     var paint2 = Paint()
       ..shader = ui.Gradient.sweep(
         center,
@@ -520,11 +522,13 @@ class PortalEffectsPainter extends CustomPainter {
         ],
         [0, 0.5, 1],
         TileMode.mirror,
-        0 - t / 2,
-        pi / 13 - t / 2, //+ t / 5
+        0 - beamsAngle1,
+        pi / 13 - beamsAngle1, //+ t / 5
       );
 
     double blur = 0.05;
+
+    var beamsAngle2 = (t / 5) % (pi * 2);
 
     var paint3 = Paint()
       ..shader = ui.Gradient.sweep(
@@ -539,8 +543,8 @@ class PortalEffectsPainter extends CustomPainter {
         ],
         [0, blur, 0.5 - blur, 0.5 + blur, 1],
         TileMode.repeated,
-        0 + t / 5,
-        (pi * 2 / 9) + t / 5, //  - t / 2
+        0 + beamsAngle2,
+        (pi * 2 / 9) + beamsAngle2,
       );
 
     canvas.saveLayer(null, Paint()..color = Colors.white.withOpacity(opacity));
