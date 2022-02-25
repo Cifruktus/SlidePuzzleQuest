@@ -179,12 +179,11 @@ class _SlideGameState extends State<SlideGame> with TickerProviderStateMixin {
   }
 
   void tryToMoveCell(int index, int displayIndex, [IntPos? desiredDir]) {
-    //todo cleanup
     var puzzle = context.read<PuzzleCubit>();
     var dir = puzzle.getMoveDir(widget.positions[displayIndex - 1]);
     if (dir != null) {
       if (desiredDir != null && dir != desiredDir) return;
-      puzzle.move(widget.positions[displayIndex - 1]);
+      puzzle.move(pos: widget.positions[displayIndex - 1]);
     }
   }
 

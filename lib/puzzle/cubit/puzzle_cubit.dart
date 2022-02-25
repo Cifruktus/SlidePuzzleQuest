@@ -44,16 +44,23 @@ class PuzzleCubit extends Cubit<PuzzleState> {
     return (pos - free).normalize();
   }
 
-  void move(IntPos pos) async {
+  void move({IntPos? pos, IntPos? direction}) async {
     if (state is PuzzleFinished) return;
 
     var free = findFreeCell(state.board)!;
-
-    bool onTheSameLine = free.x == pos.x || free.y == pos.y;
-    if (!onTheSameLine) return;
-
-    var movement = (pos - free).normalize(); // todo use getMoveDir
     var currentPos = free;
+
+
+    if (direction != null) {
+      pos = currentPos - direction;
+      if (pos.x < 0 || pos.y < 0) return;
+      if (pos.x >= boardWidth || pos.y >= boardHeight) return;
+    }
+
+    assert(pos != null, "both direction and position are null");
+
+    var movement = pos != null ? getMoveDir(pos) : null;
+    if (movement == null) return;
 
     var board = copyBoard(state.board);
 
