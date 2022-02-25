@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:slide_puzzle/puzzle/cubit/puzzle_cubit.dart';
 
@@ -11,9 +10,8 @@ import 'package:slide_puzzle/puzzle/view/endgame.dart';
 import 'package:slide_puzzle/puzzle/view/game.dart';
 import 'package:slide_puzzle/puzzle/view/level_transition.dart';
 
+import '../keyboard_input.dart';
 import 'hint.dart';
-
-bool shiftIsPressed = false;
 
 const double puzzleHeight = 500;
 const double toolsHeight = 100;
@@ -107,51 +105,6 @@ class _PuzzlePageState extends State<PuzzlePage> {
       return Size(original.height * aspectRatio, original.height);
     } else {
       return Size(original.width, original.width / aspectRatio);
-    }
-  }
-
-  void onKeyEvent(KeyEvent event, BuildContext context) {
-    var e = event;
-
-    if (e is KeyUpEvent) {
-      if (e.logicalKey == LogicalKeyboardKey.keyG) {
-        shiftIsPressed = false;
-        return;
-      }
-    }
-
-    if (e is! KeyDownEvent) return;
-
-    if (e.logicalKey == LogicalKeyboardKey.keyG) {
-      shiftIsPressed = true;
-      return;
-    }
-
-    if (!shiftIsPressed) return;
-
-    if (e.logicalKey == LogicalKeyboardKey.digit1) {
-      context.read<PuzzleCubit>().setPositions(levelKey1);
-      return;
-    }
-
-    if (e.logicalKey == LogicalKeyboardKey.digit2) {
-      context.read<PuzzleCubit>().setPositions(levelKey2);
-      return;
-    }
-
-    if (e.logicalKey == LogicalKeyboardKey.digit3) {
-      context.read<PuzzleCubit>().setPositions(levelKey3);
-      return;
-    }
-
-    if (e.logicalKey == LogicalKeyboardKey.digit4) {
-      context.read<PuzzleCubit>().setPositions(levelKey4);
-      return;
-    }
-
-    if (e.logicalKey == LogicalKeyboardKey.digit5) {
-      context.read<PuzzleCubit>().setPositions(levelKey5);
-      return;
     }
   }
 }
