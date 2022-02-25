@@ -46,16 +46,22 @@ class PuzzlePage extends StatefulWidget {
 }
 
 class _PuzzlePageState extends State<PuzzlePage> {
+  late FocusNode focus;
+
   @override
   void initState() {
     super.initState();
+    focus = FocusNode(
+      skipTraversal: true,
+    )..requestFocus();
+
     Future.delayed(Duration.zero, () => showLore(context));
   }
 
   @override
   Widget build(BuildContext context) {
     return KeyboardListener(
-        focusNode: FocusNode()..requestFocus(),
+        focusNode: focus,
         autofocus: true,
         onKeyEvent: (e) => onKeyEvent(e, context),
         child: Scaffold(
