@@ -3,7 +3,7 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "assets/AssetManifest.json": "df4a386672489a889e9fb1443917e805",
+  "assets/AssetManifest.json": "3709623017f18f53d3850d1ac079639a",
 "assets/assets/fonts/ValeraRound/VarelaRound-Regular.ttf": "6b7c705707eaa294409430419fd98efb",
 "assets/assets/img/background/1.jpg": "ab175e91a99c75d3b4fb1ef990e079f0",
 "assets/assets/img/background/2.jpg": "7184cb1754505040b54e321100ec2356",
@@ -11,6 +11,7 @@ const RESOURCES = {
 "assets/assets/img/background/4.jpg": "1fc0f8ca821e00721988fec2c3d73a7a",
 "assets/assets/img/background/5.jpg": "ed72ead9ad8ddac9602417664a0a510f",
 "assets/assets/img/background/6.jpg": "3fb2d9a467875f053ca6e88a013484f4",
+"assets/assets/img/background/NOTICE.md": "a110bef2fe9bc2c3b3d62189133bd69b",
 "assets/assets/img/puzzle.png": "b20795b98e8485ede076f229a50d46cb",
 "assets/FontManifest.json": "f576b8980d72ac4454ba5797f07c7ce5",
 "assets/fonts/MaterialIcons-Regular.otf": "4e6447691c9509f7acdbf8a931a85ca1",
@@ -20,9 +21,9 @@ const RESOURCES = {
 "canvaskit/profiling/canvaskit.js": "ae2949af4efc61d28a4a80fffa1db900",
 "canvaskit/profiling/canvaskit.wasm": "95e736ab31147d1b2c7b25f11d4c32cd",
 "favicon.png": "82582ee906b8d6b7860e8f26823bd3f7",
-"index.html": "d002673701d3822ed07597f6b9b20adb",
-"/": "d002673701d3822ed07597f6b9b20adb",
-"main.dart.js": "3717e298eac320debc87e19a90c348ef",
+"index.html": "24c8a3e5dc27e549cdf6505b8c647c34",
+"/": "24c8a3e5dc27e549cdf6505b8c647c34",
+"main.dart.js": "5926956d594ab4dd9ef9cec83f91c3a1",
 "manifest.json": "aa5272e943612b16f8b66475fa0e9b90",
 "version.json": "65dc3077ec85b9e59736032ae653d155"
 };
